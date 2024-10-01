@@ -4,6 +4,7 @@ namespace Breuer\PDF\Commands;
 
 use Breuer\PDF\Client;
 use Illuminate\Console\Command;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 use ZipArchive;
@@ -18,64 +19,94 @@ class DownloadCommand extends Command
 
     public function handle(): int
     {
-        File::ensureDirectoryExists(package_path('browser'));
-
-        $this->info('Removing old browser installations');
-        File::deleteDirectory(package_path('browser/chrome-linux64'));
-        File::deleteDirectory(package_path('browser/chromedriver-linux64'));
+        if (! File::exists(package_path('browser'))) {
+            $this->info('Creating directory: '.package_path('browser'));
+            File::ensureDirectoryExists(package_path('browser'));
+        } else {
+            $this->info('Removing old browser installations');
+            File::deleteDirectory(package_path('browser'), true);
+        }
 
         $this->info('Fetching latest browser build information');
         $response = Http::get('https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json');
+        $headless_chrome_downloads = $this->findHeadlessChromeDownloadsInResponse($response);
+        $chromedriver_downloads = $this->findChromeDriveDownloadsInResponse($response);
 
-        foreach ($response->object()->channels->Stable->downloads->{'chrome-headless-shell'} as $download) {
+        foreach ($headless_chrome_downloads as $download) {
             if ($download->platform !== $this->getPlatformKey()) {
                 continue;
             }
 
-            $zipfile = storage_path('browser/chrome-headless-shell.zip');
-
-            $this->info('Downloading chrome version: '.$response->object()->channels->Stable->version);
-
+            $this->info('Downloading latest stable headless chrome');
+            $zipfile = package_path('browser/chrome-headless-shell.zip');
             Http::sink($zipfile)->get($download->url);
 
             $this->info('Unzipping');
             $zip = new ZipArchive;
             $zip->open($zipfile);
-            $zip->extractTo(storage_path('chrome'));
+            $zip->extractTo(package_path('browser'));
             $zip->close();
 
             File::delete($zipfile);
+
+            break;
+        }
+        foreach ($chromedriver_downloads as $download) {
+            if ($download->platform !== $this->getPlatformKey()) {
+                continue;
+            }
+
+            $this->info('Downloading latest stable chromedriver');
+            $zipfile = package_path('browser/chromedriver.zip');
+            Http::sink($zipfile)->get($download->url);
+
+            $this->info('Unzipping');
+            $zip = new ZipArchive;
+            $zip->open($zipfile);
+            $zip->extractTo(package_path('browser'));
+            $zip->close();
+
+            File::delete($zipfile);
+
+            break;
         }
 
-        // foreach ($response->object()->channels->Stable->downloads->chromedriver as $download) {
-        //     if ($download->platform !== 'linux64') {
-        //         continue;
-        //     }
-        //     $zipfile = storage_path('chrome/chromedriver-linux64.zip');
-
-        //     $this->info('Downloading chromedriver version: '.$response->object()->channels->Stable->version);
-
-        //     Http::sink($zipfile)->get($download->url);
-
-        //     $this->info('Unzipping');
-        //     $zip = new ZipArchive;
-        //     $zip->open($zipfile);
-        //     $zip->extractTo(storage_path('chrome'));
-        //     $zip->close();
-
-        //     File::delete($zipfile);
-        // }
-
-        // $this->info('Fixing permissions');
-        // chmod(storage_path('chrome/chromedriver-linux64/chromedriver'), 0755);
-        // chmod(storage_path('chrome/chrome-linux64/chrome'), 0755);
-
-        // $this->info('Success');
+        $this->info('Download successful');
 
         return self::SUCCESS;
     }
 
-    protected function getPlatformKey()
+    /**
+     * @return array<int, object{platform: string, url: string}>
+     */
+    protected function findChromeDriveDownloadsInResponse(Response $response): array
+    {
+        if (! $response->ok()) {
+            throw new \Exception('Problem connecting to googlechromelabs.com');
+        }
+        if (empty($response->object()->channels->Stable->downloads->chromedriver)) {
+            throw new \Exception('Problem parsing response from googlechromelabs.com');
+        }
+
+        return $response->object()->channels->Stable->downloads->chromedriver;
+    }
+
+    /**
+     * @return array<int, object{platform: string, url: string}>
+     */
+    protected function findHeadlessChromeDownloadsInResponse(Response $response): array
+    {
+        if (! $response->ok()) {
+            throw new \Exception('Problem connecting to googlechromelabs.com');
+        }
+        if (empty($response->object()->channels->Stable->downloads->{'chrome-headless-shell'})) {
+            throw new \Exception('Problem parsing response from googlechromelabs.com');
+        }
+
+        return $response->object()->channels->Stable->downloads->{'chrome-headless-shell'};
+    }
+
+    protected function getPlatformKey(): string
     {
         if (Client::onWindows()) {
             return PHP_INT_SIZE == 4 ? 'win32' : 'win64';
@@ -83,8 +114,8 @@ class DownloadCommand extends Command
             return 'linux64';
         } elseif (Client::onMac()) {
             return php_uname('m') === 'arm64' ? 'mac-arm64' : 'mac-x64';
-        } else {
-            throw new \Exception('Platform not supported');
         }
+
+        throw new \Exception('Platform not supported');
     }
 }

@@ -1,11 +1,14 @@
-# This is my package laravel-headless-pdf
+# Convert HTML to PDF with Google Chrome
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/jbreuer95/laravel-headless-pdf.svg?style=flat-square)](https://packagist.org/packages/jbreuer95/laravel-headless-pdf)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/jbreuer95/laravel-headless-pdf/run-tests.yml?branch=master&label=tests&style=flat-square)](https://github.com/jbreuer95/laravel-headless-pdf/actions?query=workflow%3Arun-tests+branch%3Amaster)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/jbreuer95/laravel-headless-pdf/fix-php-code-style-issues.yml?branch=master&label=code%20style&style=flat-square)](https://github.com/jbreuer95/laravel-headless-pdf/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/jbreuer95/laravel-headless-pdf.svg?style=flat-square)](https://packagist.org/packages/jbreuer95/laravel-headless-pdf)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+Inspired by Spatie's package [laravel-pdf](https://github.com/spatie/laravel-pdf), only that package relies on BrowserShot that relies on Puppeteer that relies on Node.js
+
+This packages uses Selenium to communicate with Google Chrome using only PHP.  
+Laravel Dusk also uses Selenium to run its browser tests.
 
 ## Installation
 
@@ -15,7 +18,7 @@ You can install the package via composer:
 composer require jbreuer95/laravel-headless-pdf
 ```
 
-You can download or update the chrome dependency with:
+You can download (or update) chrome with:
 
 ```bash
 php artisan headless-pdf:install
@@ -37,8 +40,7 @@ return [
 ## Usage
 
 ```php
-$pdf = new Breuer\PDF();
-echo $pdf->echoPhrase('Hello, Breuer!');
+$pdf = PDF::html('<html><body><h1>Hello World</h1></body></html>')
 ```
 
 ## License

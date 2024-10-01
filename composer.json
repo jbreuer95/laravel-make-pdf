@@ -1,8 +1,8 @@
 {
     "name": "jbreuer95/laravel-headless-pdf",
-    "description": "This is my package laravel-headless-pdf",
+    "description": "Convert HTML to PDF using a headless Google Chrome instance",
     "keywords": [
-        "Jelle Breuer",
+        "Breuer",
         "laravel",
         "laravel-headless-pdf"
     ],

@@ -2,7 +2,7 @@
 
 namespace Breuer\PDF;
 
-use Breuer\PDF\Commands\DownloadCommand;
+use Breuer\PDF\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -18,6 +18,6 @@ class PDFServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-headless-pdf')
             ->hasConfigFile()
-            ->hasCommand(DownloadCommand::class);
+            ->hasCommand(InstallCommand::class);
     }
 }

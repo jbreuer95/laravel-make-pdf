@@ -11,9 +11,9 @@ use ZipArchive;
 
 use function Breuer\PDF\package_path;
 
-class DownloadCommand extends Command
+class InstallCommand extends Command
 {
-    public $signature = 'headless-pdf:download';
+    public $signature = 'headless-pdf:install';
 
     public $description = 'Download latest stable chrome-headless-shell and chromedriver';
 
@@ -71,7 +71,7 @@ class DownloadCommand extends Command
             break;
         }
 
-        $this->info('Download successful');
+        $this->info('Installation complete');
 
         return self::SUCCESS;
     }

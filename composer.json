@@ -17,6 +17,7 @@
     ],
     "require": {
         "php": "^8.2",
+        "ext-zip": "*",
         "php-webdriver/webdriver": "^1.15",
         "spatie/laravel-package-tools": "^1.16",
         "illuminate/contracts": "^10.0||^11.0"
@@ -38,7 +39,7 @@
             "Breuer\\PDF\\": "src/"
         },
         "files": [
-            "./src/functions.php"
+            "src/functions.php"
         ]
     },
     "autoload-dev": {

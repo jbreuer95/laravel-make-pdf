@@ -17,15 +17,15 @@
     ],
     "require": {
         "php": "^8.2",
-        "illuminate/contracts": "^10.0||^11.0",
         "php-webdriver/webdriver": "^1.15",
-        "spatie/laravel-package-tools": "^1.16"
+        "spatie/laravel-package-tools": "^1.16",
+        "illuminate/contracts": "^10.0||^11.0"
     },
     "require-dev": {
-        "larastan/larastan": "^2.9",
         "laravel/pint": "^1.14",
         "nunomaduro/collision": "^8.1.1||^7.10.0",
-        "orchestra/testbench": "^9.5",
+        "larastan/larastan": "^2.9",
+        "orchestra/testbench": "^9.0.0||^8.22.0",
         "pestphp/pest": "^2.34",
         "pestphp/pest-plugin-arch": "^2.7",
         "pestphp/pest-plugin-laravel": "^2.3",
@@ -47,25 +47,13 @@
         }
     },
     "scripts": {
+        "post-autoload-dump": "@composer run prepare",
+        "clear": "@php vendor/bin/testbench package:purge-laravel-headless-pdf --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
         "analyse": "vendor/bin/phpstan analyse --ansi",
         "test": "vendor/bin/pest",
         "test-coverage": "vendor/bin/pest --coverage",
-        "format": "vendor/bin/pint --ansi",
-        "post-autoload-dump": [
-            "@clear",
-            "@prepare"
-        ],
-        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
-        "prepare": "@php vendor/bin/testbench package:discover --ansi",
-        "serve": [
-            "Composer\\Config::disableProcessTimeout",
-            "@build",
-            "@php vendor/bin/testbench serve --ansi"
-        ],
-        "lint": [
-            "@php vendor/bin/pint --ansi",
-            "@php vendor/bin/phpstan analyse --verbose --ansi"
-        ]
+        "format": "vendor/bin/pint --ansi"
     },
     "config": {
         "sort-packages": true,

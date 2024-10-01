@@ -4,9 +4,9 @@ namespace Breuer\PDF\Tests;
 
 use Breuer\PDF\PDFServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
+use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 
-class TestCase extends Orchestra
+class TestCase extends PHPUnitTestCase
 {
     protected function setUp(): void
     {

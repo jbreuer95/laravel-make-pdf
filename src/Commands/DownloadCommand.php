@@ -32,7 +32,6 @@ class DownloadCommand extends Command
                 continue;
             }
 
-            dd($download);
             $zipfile = storage_path('browser/chrome-headless-shell.zip');
 
             $this->info('Downloading chrome version: '.$response->object()->channels->Stable->version);

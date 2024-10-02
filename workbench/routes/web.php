@@ -11,6 +11,10 @@ Route::get('/pdf', function () {
     return PDF::view('test')->response();
 });
 
+Route::get('/pdf-named', function () {
+    return PDF::view('test')->name('hello')->response();
+});
+
 Route::get('/pdf-download', function () {
     return PDF::view('test')->download();
 });

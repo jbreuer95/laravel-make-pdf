@@ -6,12 +6,22 @@ use Facebook\WebDriver\Chrome\ChromeDevToolsDriver;
 use Facebook\WebDriver\Chrome\ChromeDriver;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
+use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 
 class Client
 {
     protected ChromeDriver $browser;
 
     protected ChromeDevToolsDriver $devTools;
+
+    protected $filename = 'download.pdf';
+
+    protected $html = '';
+
+    public string $viewName = '';
+
+    public array $viewData = [];
 
     public function __construct()
     {
@@ -27,9 +37,52 @@ class Client
         }
     }
 
-    public function html(string $html): string
+    public function response(): Response
     {
-        $this->browser->get('data:text/html;charset=utf-8,'.rawurlencode($html));
+        return response($this->getContent(), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="'.$this->filename.'"',
+        ]);
+    }
+
+    public function download(): Response
+    {
+        return response($this->getContent(), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="'.$this->filename.'"',
+        ]);
+    }
+
+    public function view(string $view, array $data = []): self
+    {
+        $this->viewName = $view;
+
+        $this->viewData = $data;
+
+        return $this;
+    }
+
+    public function html(string $html): self
+    {
+        $this->html = $html;
+
+        return $this;
+    }
+
+    public function name(string $filename): self
+    {
+        $this->filename = Str::finish($filename, '.pdf');
+
+        return $this;
+    }
+
+    protected function getContent(): string
+    {
+        if ($this->viewName) {
+            $this->html = view($this->viewName, $this->viewData)->render();
+        }
+
+        $this->browser->get('data:text/html;charset=utf-8,'.rawurlencode($this->html));
 
         $response = $this->devTools->execute('Page.printToPDF', [
             'printBackground' => true,
@@ -45,7 +98,7 @@ class Client
         return base64_decode($response['data']);
     }
 
-    public function startBrowser(): ChromeDriver
+    protected function startBrowser(): ChromeDriver
     {
         putenv('WEBDRIVER_CHROME_DRIVER='.$this->chromeDriverBinary());
 

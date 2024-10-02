@@ -4,4 +4,4 @@ providers:
 workbench:
   discovers:
     web: true
-    views: false
+    views: true

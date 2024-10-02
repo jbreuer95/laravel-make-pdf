@@ -7,10 +7,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('pdf', function () {
-    $pdf = PDF::html('<h1>hello world</h1>');
+Route::get('/pdf', function () {
+    return PDF::view('test')->response();
+});
 
-    return response($pdf, 200, [
-        'content-type' => 'application/pdf',
-    ]);
+Route::get('/pdf-download', function () {
+    return PDF::view('test')->download();
 });

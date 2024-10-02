@@ -7,10 +7,21 @@ it('can test', function () {
 });
 
 it('can inline a pdf', function () {
-    $response = get('pdf');
+    $response = get('/pdf');
 
     $response
         ->assertOk()
         ->assertHeader('content-type', 'application/pdf')
+        ->assertHeader('content-disposition', 'inline; filename="download.pdf"')
+        ->assertSeeText('PDF-1.4');
+});
+
+it('can download a pdf', function () {
+    $response = get('/pdf-download');
+
+    $response
+        ->assertOk()
+        ->assertHeader('content-type', 'application/pdf')
+        ->assertHeader('content-disposition', 'attachment; filename="download.pdf"')
         ->assertSeeText('PDF-1.4');
 });

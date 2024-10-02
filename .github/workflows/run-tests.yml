@@ -54,5 +54,8 @@ jobs:
       - name: List Installed Dependencies
         run: composer show -D
 
+      - name: Install browsers
+        run: vendor/bin/testbench headless-pdf:install
+
       - name: Execute tests
         run: vendor/bin/pest --ci

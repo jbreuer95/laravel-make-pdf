@@ -27,7 +27,7 @@ class InstallCommand extends Command
             File::deleteDirectory(package_path('browser'), true);
         }
 
-        $this->info('Fetching latest browser build information');
+        $this->info('Fetching latest chrome build information');
         $response = Http::get('https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json');
         $headless_chrome_downloads = $this->findHeadlessChromeDownloadsInResponse($response);
         $chromedriver_downloads = $this->findChromeDriveDownloadsInResponse($response);
@@ -108,12 +108,17 @@ class InstallCommand extends Command
 
     protected function getPlatformKey(): string
     {
-        if (Client::onWindows()) {
-            return PHP_INT_SIZE == 4 ? 'win32' : 'win64';
+
+        if (Client::onWindows32()) {
+            return 'win32';
+        } elseif (Client::onWindows64()) {
+            return 'win64';
         } elseif (Client::onLinux()) {
             return 'linux64';
-        } elseif (Client::onMac()) {
-            return php_uname('m') === 'arm64' ? 'mac-arm64' : 'mac-x64';
+        } elseif (Client::onMacARM()) {
+            return 'mac-arm64';
+        } elseif (Client::onMacIntel()) {
+            return 'mac-x64';
         }
 
         throw new \Exception('Platform not supported');

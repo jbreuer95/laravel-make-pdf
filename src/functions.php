@@ -2,11 +2,11 @@
 
 namespace Breuer\PDF;
 
-use Illuminate\Support\Facades\App;
+use function Illuminate\Filesystem\join_paths;
 
 if (! function_exists('Breuer\PDF\package_path')) {
-    function package_path(string $path = ''): string
+    function package_path(string $path = '', string ...$paths): string
     {
-        return App::joinPaths(dirname(__FILE__, 2), $path);
+        return join_paths(dirname(__FILE__, 2), $path, ...$paths);
     }
 }

@@ -15,12 +15,15 @@ class Client
 
     protected ChromeDevToolsDriver $devTools;
 
-    protected $filename = 'download.pdf';
+    protected string $filename = 'download.pdf';
 
-    protected $html = '';
+    protected string $html = '';
 
     public string $viewName = '';
 
+    /**
+     * @var array<mixed>
+     */
     public array $viewData = [];
 
     public function __construct()
@@ -53,6 +56,9 @@ class Client
         ]);
     }
 
+    /**
+     * @param  array<mixed>  $data
+     */
     public function view(string $view, array $data = []): self
     {
         $this->viewName = $view;

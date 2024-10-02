@@ -10,7 +10,11 @@ This package allows you to easily convert HTML to PDF using Google Chrome throug
 It is inspired by Spatie's [laravel-pdf](https://github.com/spatie/laravel-pdf) package,
 which uses BrowserShot and Puppeteer, but our solution offers a more PHP-centric approach using Selenium.
 
-## Installation
+## Requirements
+
+Laravel Headless PDF requires **PHP 8.1+** and **Laravel 10+**.
+
+## Installation & setup
 
 You can install the package via Composer:
 

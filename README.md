@@ -14,7 +14,7 @@ which uses BrowserShot and Puppeteer, but our solution offers a more PHP-centric
 
 Laravel Headless PDF requires **PHP 8.1+** and **Laravel 10+**.
 
-## Installation & setup
+## Installation & Setup
 
 You can install the package via Composer:
 
@@ -22,40 +22,81 @@ You can install the package via Composer:
 composer require jbreuer95/laravel-headless-pdf
 ```
 
-After installing, you must download headless Google Chrome using the following Artisan command:
+After installation, download Headless Google Chrome using the following Artisan command:
 
 ```bash
 php artisan headless-pdf:install
 ```
 
-To customize the package configuration, you can publish the configuration file:
+To customize the package configuration, publish the configuration file:
 
 ```bash
 php artisan vendor:publish --tag="laravel-headless-pdf-config"
 ```
 
-This is the contents of the published config file:
+Here is the content of the published config file:
 
 ```php
 return [
+    // Configuration options will go here
 ];
 ```
 
 ## Usage
 
-Converting HTML to PDF is simple with this package. Here’s a basic example:
+Converting HTML to PDF with this package is simple and efficient. Below are a few common use cases:
+
+### Basic Example
+
+Convert a Blade view to a PDF and stream it to the browser:
 
 ```php
-use PDF;
+use Breuer\PDF\Facades\PDF;
 
-$pdf = PDF::html('<html><body><h1>Hello World</h1></body></html>');
+// Stream the PDF directly to the browser
+Route::get('/', function () {
+    return PDF::view('view.name', ['foo' => 'bar'])->name('filename.pdf')->response();
+});
 
-// Save or stream the generated PDF
-$pdf->save('file.pdf');  // Save the PDF to a file
-$pdf->stream();          // Stream the PDF directly to the browser
+// Or force the browser to download the PDF file
+Route::get('/', function () {
+    return PDF::view('view.name', ['foo' => 'bar'])->name('filename.pdf')->download();
+});
+```
+
+### Additional Options
+
+**Render Raw HTML:** Instead of passing a Blade view, you can directly pass HTML:
+
+```php
+PDF::html('<h1>Hello World</h1>');
+```
+
+**Save to File:** Use the `save` method to store the PDF at a given file path:
+
+```php
+->save('/path/to/save/yourfile.pdf');
+```
+
+**Custom Filename:** Define a custom name for the PDF when downloading from the browser. The `.pdf` extension is automatically appended if omitted:
+
+```php
+->name('custom_filename');
+```
+
+**Stream PDF:** Display the PDF directly in the browser without saving it to disk:
+
+```php
+->response();
+```
+
+**Force Download:** Prompt the browser to immediately download the PDF:
+
+```php
+->download();
 ```
 
 ## License
 
 This package is open-sourced software licensed under the MIT License.  
-Please see [License File](LICENSE.md) for more information.
+Please see the [License File](LICENSE.md) for more information.

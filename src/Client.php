@@ -30,6 +30,7 @@ class Client
 
         $response = $this->devTools->execute('Page.printToPDF', [
             'printBackground' => true,
+            'displayHeaderFooter' => false,
             'paperWidth' => 8.27,
             'paperHeight' => 11.69,
             'marginTop' => 0,

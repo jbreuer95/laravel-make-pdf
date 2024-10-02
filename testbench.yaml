@@ -1,0 +1,7 @@
+providers:
+  - Breuer\PDF\PDFServiceProvider
+
+workbench:
+  discovers:
+    web: true
+    views: false

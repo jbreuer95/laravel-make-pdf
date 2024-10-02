@@ -75,7 +75,7 @@ class Client
         } elseif (Client::onWindows64()) {
             return package_path('browser', 'chromedriver-win64', 'chromedriver.exe');
         } elseif (Client::onLinux()) {
-            throw new \Exception('TODO');
+            return package_path('browser', 'chromedriver-linux64', 'chromedriver');
         } elseif (Client::onMacARM()) {
             throw new \Exception('TODO');
         } elseif (Client::onMacIntel()) {
@@ -92,7 +92,7 @@ class Client
         } elseif (Client::onWindows64()) {
             return package_path('browser', 'chrome-headless-shell-win64', 'chrome-headless-shell.exe');
         } elseif (Client::onLinux()) {
-            throw new \Exception('TODO');
+            return package_path('browser', 'chrome-headless-shell-linux64', 'chrome-headless-shell');
         } elseif (Client::onMacARM()) {
             throw new \Exception('TODO');
         } elseif (Client::onMacIntel()) {

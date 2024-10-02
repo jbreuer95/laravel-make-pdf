@@ -21,9 +21,6 @@ class Client
 
     public function __destruct()
     {
-        if (! $this->browser) {
-            return;
-        }
         try {
             $this->browser->quit();
         } catch (\Throwable $th) {

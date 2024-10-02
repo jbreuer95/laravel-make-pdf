@@ -71,6 +71,10 @@ class InstallCommand extends Command
             break;
         }
 
+        $this->info('Fixing permissions');
+        chmod(Client::chromeDriverBinary(), 0755);
+        chmod(Client::chromeHeadlessBinary(), 0755);
+
         $this->info('Installation complete');
 
         return self::SUCCESS;

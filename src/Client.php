@@ -68,34 +68,34 @@ class Client
         return ChromeDriver::start($capabilities);
     }
 
-    public function chromeDriverBinary(): string
+    public static function chromeDriverBinary(): string
     {
-        if (Client::onWindows32()) {
+        if (self::onWindows32()) {
             return package_path('browser', 'chromedriver-win32', 'chromedriver.exe');
-        } elseif (Client::onWindows64()) {
+        } elseif (self::onWindows64()) {
             return package_path('browser', 'chromedriver-win64', 'chromedriver.exe');
-        } elseif (Client::onLinux()) {
+        } elseif (self::onLinux()) {
             return package_path('browser', 'chromedriver-linux64', 'chromedriver');
-        } elseif (Client::onMacARM()) {
+        } elseif (self::onMacARM()) {
             throw new \Exception('TODO');
-        } elseif (Client::onMacIntel()) {
+        } elseif (self::onMacIntel()) {
             throw new \Exception('TODO');
         }
 
         throw new \Exception('Platform not supported');
     }
 
-    public function chromeHeadlessBinary(): string
+    public static function chromeHeadlessBinary(): string
     {
-        if (Client::onWindows32()) {
+        if (self::onWindows32()) {
             return package_path('browser', 'chrome-headless-shell-win32', 'chrome-headless-shell.exe');
-        } elseif (Client::onWindows64()) {
+        } elseif (self::onWindows64()) {
             return package_path('browser', 'chrome-headless-shell-win64', 'chrome-headless-shell.exe');
-        } elseif (Client::onLinux()) {
+        } elseif (self::onLinux()) {
             return package_path('browser', 'chrome-headless-shell-linux64', 'chrome-headless-shell');
-        } elseif (Client::onMacARM()) {
+        } elseif (self::onMacARM()) {
             throw new \Exception('TODO');
-        } elseif (Client::onMacIntel()) {
+        } elseif (self::onMacIntel()) {
             throw new \Exception('TODO');
         }
 

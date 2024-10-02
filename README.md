@@ -1,9 +1,10 @@
 # Convert HTML to PDF with Google Chrome
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/jbreuer95/laravel-headless-pdf.svg?style=flat-square)](https://packagist.org/packages/jbreuer95/laravel-headless-pdf)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/jbreuer95/laravel-headless-pdf/run-tests.yml?branch=master&label=tests&style=flat-square)](https://github.com/jbreuer95/laravel-headless-pdf/actions?query=workflow%3Arun-tests+branch%3Amaster)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/jbreuer95/laravel-headless-pdf/fix-php-code-style-issues.yml?branch=master&label=code%20style&style=flat-square)](https://github.com/jbreuer95/laravel-headless-pdf/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/jbreuer95/laravel-headless-pdf.svg?style=flat-square)](https://packagist.org/packages/jbreuer95/laravel-headless-pdf)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/jbreuer95/laravel-headless-pdf/run-tests.yml?branch=master&label=tests&style=flat-square)](https://github.com/jbreuer95/laravel-headless-pdf/actions/workflows/run-tests.yml)
+[![GitHub PHPStan Action Status](https://img.shields.io/github/actions/workflow/status/jbreuer95/laravel-headless-pdf/phpstan.yml?branch=master&label=phpstan&style=flat-square)](https://github.com/jbreuer95/laravel-headless-pdf/actions/workflows/phpstan.yml)
+[![GitHub Pint Action Status](https://img.shields.io/github/actions/workflow/status/jbreuer95/laravel-headless-pdf/fix-php-code-style-issues.yml?branch=master&label=laravel%20pint&style=flat-square)](https://github.com/jbreuer95/laravel-headless-pdf/actions/workflows/fix-php-code-style-issues.yml)
 
 This package allows you to easily convert HTML to PDF using Google Chrome through Selenium, without needing Node.js.
 It is inspired by Spatie's [laravel-pdf](https://github.com/spatie/laravel-pdf) package,

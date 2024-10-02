@@ -81,9 +81,9 @@ class Client
         } elseif (self::onLinux()) {
             return package_path('browser', 'chromedriver-linux64', 'chromedriver');
         } elseif (self::onMacARM()) {
-            throw new \Exception('TODO');
+            return package_path('browser', 'chromedriver-mac-arm64', 'chromedriver');
         } elseif (self::onMacIntel()) {
-            throw new \Exception('TODO');
+            return package_path('browser', 'chromedriver-mac-x64', 'chromedriver');
         }
 
         throw new \Exception('Platform not supported');
@@ -98,9 +98,9 @@ class Client
         } elseif (self::onLinux()) {
             return package_path('browser', 'chrome-headless-shell-linux64', 'chrome-headless-shell');
         } elseif (self::onMacARM()) {
-            throw new \Exception('TODO');
+            return package_path('browser', 'chrome-headless-shell-mac-arm64', 'chrome-headless-shell');
         } elseif (self::onMacIntel()) {
-            throw new \Exception('TODO');
+            return package_path('browser', 'chrome-headless-shell-mac-x64', 'chrome-headless-shell');
         }
 
         throw new \Exception('Platform not supported');

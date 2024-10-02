@@ -53,47 +53,47 @@ Convert a Blade view to a PDF and stream it to the browser:
 ```php
 use Breuer\PDF\Facades\PDF;
 
-// Stream the PDF directly to the browser
 Route::get('/', function () {
-    return PDF::view('view.name', ['foo' => 'bar'])->name('filename.pdf')->response();
-});
-
-// Or force the browser to download the PDF file
-Route::get('/', function () {
-    return PDF::view('view.name', ['foo' => 'bar'])->name('filename.pdf')->download();
+    return PDF::view('view.name', [])->response();
 });
 ```
 
-### Additional Options
+Or force the browser to download the PDF file
+
+```php
+return PDF::view('view.name', [])->download();
+```
+
+### Options
 
 **Render Raw HTML:** Instead of passing a Blade view, you can directly pass HTML:
 
 ```php
-PDF::html('<h1>Hello World</h1>');
+PDF::html('<h1>Hello World</h1>')
 ```
 
 **Save to File:** Use the `save` method to store the PDF at a given file path:
 
 ```php
-->save('/path/to/save/yourfile.pdf');
+->save('/path/to/save/yourfile.pdf')
 ```
 
 **Custom Filename:** Define a custom name for the PDF when downloading from the browser. The `.pdf` extension is automatically appended if omitted:
 
 ```php
-->name('custom_filename');
+->name('custom_filename')
 ```
 
 **Stream PDF:** Display the PDF directly in the browser without saving it to disk:
 
 ```php
-->response();
+->response()
 ```
 
 **Force Download:** Prompt the browser to immediately download the PDF:
 
 ```php
-->download();
+->download()
 ```
 
 ## License

@@ -21,7 +21,13 @@ class Client
 
     public function __destruct()
     {
-        $this->browser->quit();
+        if (! $this->browser) {
+            return;
+        }
+        try {
+            $this->browser->quit();
+        } catch (\Throwable $th) {
+        }
     }
 
     public function html(string $html): string

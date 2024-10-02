@@ -1,13 +1,17 @@
 <?php
 
-use Breuer\PDF\Facades\PDF;
+use function Pest\Laravel\get;
 
 it('can test', function () {
     expect(true)->toBeTrue();
 });
 
-it('can generate a pdf', function () {
-    $pdf = PDF::html('<h1>Hello World</h1>');
+it('can inline a pdf', function () {
+    $response = get('pdf');
 
-    expect($pdf)->not->toBeNull();
+    $response
+        ->assertOk()
+        ->assertHeader('content-type', 'application/pdf');
+
+    expect($response)->toMatchSnapshot();
 });

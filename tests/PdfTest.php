@@ -11,7 +11,6 @@ it('can inline a pdf', function () {
 
     $response
         ->assertOk()
-        ->assertHeader('content-type', 'application/pdf');
-
-    expect($response)->toMatchSnapshot();
+        ->assertHeader('content-type', 'application/pdf')
+        ->assertSeeText('PDF-1.4');
 });

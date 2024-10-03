@@ -1,4 +1,4 @@
-# Convert HTML to PDF with Google Chrome
+# Convert HTML to PDF with headless Chrome
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/jbreuer95/laravel-headless-pdf.svg?style=flat-square)](https://packagist.org/packages/jbreuer95/laravel-headless-pdf)
 [![Total Downloads](https://img.shields.io/packagist/dt/jbreuer95/laravel-headless-pdf.svg?style=flat-square)](https://packagist.org/packages/jbreuer95/laravel-headless-pdf)
@@ -6,7 +6,7 @@
 [![GitHub PHPStan Action Status](https://img.shields.io/github/actions/workflow/status/jbreuer95/laravel-headless-pdf/phpstan.yml?branch=master&label=phpstan&style=flat-square)](https://github.com/jbreuer95/laravel-headless-pdf/actions/workflows/phpstan.yml)
 [![GitHub Pint Action Status](https://img.shields.io/github/actions/workflow/status/jbreuer95/laravel-headless-pdf/fix-php-code-style-issues.yml?branch=master&label=laravel%20pint&style=flat-square)](https://github.com/jbreuer95/laravel-headless-pdf/actions/workflows/fix-php-code-style-issues.yml)
 
-This package allows you to easily convert HTML to PDF using Google Chrome through Selenium, without needing Node.js.
+This package allows you to easily convert HTML to PDF using headless Chrome through Selenium, without needing Node.js.
 It is inspired by Spatie's [laravel-pdf](https://github.com/spatie/laravel-pdf) package,
 which uses BrowserShot and Puppeteer, but our solution offers a more PHP-centric approach using Selenium.
 
@@ -22,7 +22,7 @@ You can install the package via Composer:
 composer require jbreuer95/laravel-headless-pdf
 ```
 
-After installation, download Headless Google Chrome using the following Artisan command:
+After installation, download headless Chrome using the following Artisan command:
 
 ```bash
 php artisan headless-pdf:install

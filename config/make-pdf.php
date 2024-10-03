@@ -1,6 +1,6 @@
 <?php
 
-// config for Breuer/PDF
+// config for Breuer/MakePDF
 return [
 
 ];

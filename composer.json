@@ -2,7 +2,7 @@
     "name": "jbreuer95/laravel-make-pdf",
     "description": "Convert HTML to PDF using a headless Chrome instance",
     "keywords": [
-        "Breuer",
+        "breuer",
         "laravel",
         "laravel-make-pdf"
     ],

@@ -1,6 +1,6 @@
 {
     "name": "jbreuer95/laravel-headless-pdf",
-    "description": "Convert HTML to PDF using a headless Google Chrome instance",
+    "description": "Convert HTML to PDF using a headless Chrome instance",
     "keywords": [
         "Breuer",
         "laravel",

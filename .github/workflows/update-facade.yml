@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "**.php"
+      - ".github/workflows/update-facade.yml"
 
 permissions:
   contents: write

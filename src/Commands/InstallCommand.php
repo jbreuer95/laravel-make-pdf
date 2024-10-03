@@ -1,15 +1,15 @@
 <?php
 
-namespace Breuer\PDF\Commands;
+namespace Breuer\MakePDF\Commands;
 
-use Breuer\PDF\Client;
+use Breuer\MakePDF\Client;
 use Illuminate\Console\Command;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 use ZipArchive;
 
-use function Breuer\PDF\package_path;
+use function Breuer\MakePDF\package_path;
 
 class InstallCommand extends Command
 {

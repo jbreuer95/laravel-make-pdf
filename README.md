@@ -51,7 +51,7 @@ Converting HTML to PDF with this package is simple and efficient. Below are a fe
 Convert a Blade view to a PDF and stream it to the browser:
 
 ```php
-use Breuer\PDF\Facades\PDF;
+use Breuer\MakePDF\Facades\PDF;
 
 Route::get('/', function () {
     return PDF::view('view.name', [])->response();

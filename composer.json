@@ -37,7 +37,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Breuer\\PDF\\": "src/"
+            "Breuer\\MakePDF\\": "src/"
         },
         "files": [
             "src/functions.php"
@@ -45,7 +45,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Breuer\\PDF\\Tests\\": "tests/"
+            "Breuer\\MakePDF\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -75,10 +75,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Breuer\\PDF\\PDFServiceProvider"
+                "Breuer\\MakePDF\\PDFServiceProvider"
             ],
             "aliases": {
-                "PDF": "Breuer\\PDF\\Facades\\PDF"
+                "PDF": "Breuer\\MakePDF\\Facades\\PDF"
             }
         }
     },

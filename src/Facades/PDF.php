@@ -1,16 +1,16 @@
 <?php
 
-namespace Breuer\PDF\Facades;
+namespace Breuer\MakePDF\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Breuer\PDF\PDF
+ * @see \Breuer\MakePDF\PDF
  */
 class PDF extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return \Breuer\PDF\Client::class;
+        return \Breuer\MakePDF\Client::class;
     }
 }

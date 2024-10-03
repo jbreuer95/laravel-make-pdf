@@ -1,5 +1,5 @@
 providers:
-  - Breuer\PDF\PDFServiceProvider
+  - Breuer\MakePDF\PDFServiceProvider
 
 workbench:
   discovers:

@@ -1,8 +1,8 @@
 <?php
 
-namespace Breuer\PDF;
+namespace Breuer\MakePDF;
 
-use Breuer\PDF\Commands\InstallCommand;
+use Breuer\MakePDF\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 

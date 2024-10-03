@@ -1,6 +1,6 @@
 <?php
 
-namespace Breuer\PDF;
+namespace Breuer\MakePDF;
 
 use Facebook\WebDriver\Chrome\ChromeDevToolsDriver;
 use Facebook\WebDriver\Chrome\ChromeDriver;

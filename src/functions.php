@@ -1,6 +1,6 @@
 <?php
 
-namespace Breuer\PDF;
+namespace Breuer\MakePDF;
 
 use function Illuminate\Filesystem\join_paths;
 

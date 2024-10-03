@@ -1,6 +1,6 @@
 <?php
 
-namespace Breuer\PDF\Tests;
+namespace Breuer\MakePDF\Tests;
 
 use Orchestra\Testbench\Concerns\WithWorkbench;
 use Orchestra\Testbench\TestCase as Orchestra;

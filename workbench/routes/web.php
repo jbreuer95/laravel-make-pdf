@@ -1,6 +1,6 @@
 <?php
 
-use Breuer\PDF\Facades\PDF;
+use Breuer\MakePDF\Facades\PDF;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {

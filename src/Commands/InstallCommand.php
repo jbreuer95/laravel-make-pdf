@@ -13,7 +13,7 @@ use function Breuer\PDF\package_path;
 
 class InstallCommand extends Command
 {
-    public $signature = 'headless-pdf:install';
+    public $signature = 'make-pdf:install';
 
     public $description = 'Download latest stable chrome-headless-shell and chromedriver';
 

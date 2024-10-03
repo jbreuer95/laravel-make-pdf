@@ -16,7 +16,7 @@ class PDFServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('laravel-headless-pdf')
+            ->name('laravel-make-pdf')
             ->hasConfigFile()
             ->hasCommand(InstallCommand::class);
     }

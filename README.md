@@ -1,10 +1,10 @@
 # Convert HTML to PDF with headless Chrome
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/jbreuer95/laravel-headless-pdf.svg?style=flat-square)](https://packagist.org/packages/jbreuer95/laravel-headless-pdf)
-[![Total Downloads](https://img.shields.io/packagist/dt/jbreuer95/laravel-headless-pdf.svg?style=flat-square)](https://packagist.org/packages/jbreuer95/laravel-headless-pdf)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/jbreuer95/laravel-headless-pdf/run-tests.yml?branch=master&label=tests&style=flat-square)](https://github.com/jbreuer95/laravel-headless-pdf/actions/workflows/run-tests.yml)
-[![GitHub PHPStan Action Status](https://img.shields.io/github/actions/workflow/status/jbreuer95/laravel-headless-pdf/phpstan.yml?branch=master&label=phpstan&style=flat-square)](https://github.com/jbreuer95/laravel-headless-pdf/actions/workflows/phpstan.yml)
-[![GitHub Pint Action Status](https://img.shields.io/github/actions/workflow/status/jbreuer95/laravel-headless-pdf/fix-php-code-style-issues.yml?branch=master&label=laravel%20pint&style=flat-square)](https://github.com/jbreuer95/laravel-headless-pdf/actions/workflows/fix-php-code-style-issues.yml)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/jbreuer95/laravel-make-pdf.svg?style=flat-square)](https://packagist.org/packages/jbreuer95/laravel-make-pdf)
+[![Total Downloads](https://img.shields.io/packagist/dt/jbreuer95/laravel-make-pdf.svg?style=flat-square)](https://packagist.org/packages/jbreuer95/laravel-make-pdf)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/jbreuer95/laravel-make-pdf/run-tests.yml?branch=master&label=tests&style=flat-square)](https://github.com/jbreuer95/laravel-make-pdf/actions/workflows/run-tests.yml)
+[![GitHub PHPStan Action Status](https://img.shields.io/github/actions/workflow/status/jbreuer95/laravel-make-pdf/phpstan.yml?branch=master&label=phpstan&style=flat-square)](https://github.com/jbreuer95/laravel-make-pdf/actions/workflows/phpstan.yml)
+[![GitHub Pint Action Status](https://img.shields.io/github/actions/workflow/status/jbreuer95/laravel-make-pdf/fix-php-code-style-issues.yml?branch=master&label=laravel%20pint&style=flat-square)](https://github.com/jbreuer95/laravel-make-pdf/actions/workflows/fix-php-code-style-issues.yml)
 
 This package allows you to easily convert HTML to PDF using headless Chrome through Selenium, without needing Node.js.
 It is inspired by Spatie's [laravel-pdf](https://github.com/spatie/laravel-pdf) package,
@@ -12,26 +12,26 @@ which uses BrowserShot and Puppeteer, but our solution offers a more PHP-centric
 
 ## Requirements
 
-Laravel Headless PDF requires **PHP 8.1+** and **Laravel 10+**.
+Laravel Make PDF requires **PHP 8.1+** and **Laravel 10+**.
 
 ## Installation & Setup
 
 You can install the package via Composer:
 
 ```bash
-composer require jbreuer95/laravel-headless-pdf
+composer require jbreuer95/laravel-make-pdf
 ```
 
 After installation, download headless Chrome using the following Artisan command:
 
 ```bash
-php artisan headless-pdf:install
+php artisan make-pdf:install
 ```
 
 To customize the package configuration, publish the configuration file:
 
 ```bash
-php artisan vendor:publish --tag="laravel-headless-pdf-config"
+php artisan vendor:publish --tag="laravel-make-pdf-config"
 ```
 
 Here is the content of the published config file:

@@ -14,10 +14,16 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          ref: ${{ github.head_ref }}
+          php-version: "8.3"
+          coverage: none
+
+      - name: Install composer dependencies
+        uses: ramsey/composer-install@v3
 
       - name: Update facade
         run: vendor/bin/testbench autodoc:facades src\Facades

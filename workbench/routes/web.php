@@ -18,3 +18,10 @@ Route::get('/pdf-named', function () {
 Route::get('/pdf-download', function () {
     return PDF::view('test')->download();
 });
+
+Route::get('/pdf-headerfooter', function () {
+    return PDF::view('test')
+        ->headerView('header')
+        ->footerView('footer')
+        ->response();
+});

@@ -19,12 +19,24 @@ class Client
 
     protected string $html = '';
 
-    public string $viewName = '';
+    protected string $footerHtml = '';
 
-    /**
-     * @var array<mixed>
-     */
-    public array $viewData = [];
+    protected string $headerHtml = '';
+
+    protected string $viewName = '';
+
+    protected string $headerViewName = '';
+
+    protected string $footerViewName = '';
+
+    /** @var array<mixed> */
+    protected array $viewData = [];
+
+    /** @var array<mixed> */
+    protected array $headerViewData = [];
+
+    /** @var array<mixed> */
+    protected array $footerViewData = [];
 
     public function __construct()
     {
@@ -56,9 +68,7 @@ class Client
         ]);
     }
 
-    /**
-     * @param  array<mixed>  $data
-     */
+    /** @param array<mixed> $data */
     public function view(string $view, array $data = []): self
     {
         $this->viewName = $view;
@@ -68,9 +78,43 @@ class Client
         return $this;
     }
 
+    /** @param array<mixed> $data */
+    public function headerView(string $view, array $data = []): self
+    {
+        $this->headerViewName = $view;
+
+        $this->headerViewData = $data;
+
+        return $this;
+    }
+
+    /** @param array<mixed> $data */
+    public function footerView(string $view, array $data = []): self
+    {
+        $this->footerViewName = $view;
+
+        $this->footerViewData = $data;
+
+        return $this;
+    }
+
     public function html(string $html): self
     {
         $this->html = $html;
+
+        return $this;
+    }
+
+    public function headerHtml(string $html): self
+    {
+        $this->headerHtml = $html;
+
+        return $this;
+    }
+
+    public function footerHtml(string $html): self
+    {
+        $this->footerHtml = $html;
 
         return $this;
     }
@@ -88,11 +132,23 @@ class Client
             $this->html = view($this->viewName, $this->viewData)->render();
         }
 
+        if ($this->headerViewName) {
+            $this->headerHtml = view($this->headerViewName, $this->headerViewData)->render();
+        }
+
+        if ($this->footerViewName) {
+            $this->footerHtml = view($this->footerViewName, $this->footerViewData)->render();
+        }
+
         $this->browser->get('data:text/html;charset=utf-8,'.rawurlencode($this->html));
+
+        $displayHeaderFooter = ! empty($this->footerHtml) || ! empty($this->headerHtml);
 
         $response = $this->devTools->execute('Page.printToPDF', [
             'printBackground' => true,
-            'displayHeaderFooter' => false,
+            'displayHeaderFooter' => $displayHeaderFooter,
+            'headerTemplate' => $this->headerHtml,
+            'footerTemplate' => $this->footerHtml,
             'paperWidth' => 8.27,
             'paperHeight' => 11.69,
             'marginTop' => 0,

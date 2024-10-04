@@ -66,31 +66,82 @@ return PDF::view('view.name', [])->download();
 
 ### Options
 
-**Render Raw HTML:** Instead of passing a Blade view, you can directly pass HTML:
+#### Render Raw HTML:
+
+Instead of passing a Blade view, you can directly pass HTML:
 
 ```php
 PDF::html('<h1>Hello World</h1>')
 ```
 
-**Save to File:** Use the `save` method to store the PDF at a given file path:
+#### Header and Footer
+
+You can include a view in the header and footer of every page:
 
 ```php
-->save('/path/to/save/yourfile.pdf')
+->headerView('view.header')
+->footerView('view.footer')
 ```
 
-**Custom Filename:** Define a custom name for the PDF when downloading from the browser. The `.pdf` extension is automatically appended if omitted:
+Alternatively, set raw HTML for the header and footer:
+
+```php
+->headerHtml('<div>My header</div>')
+->footerHtml('<div>My footer</div>')
+```
+
+In the header or footer, the following placeholders can be used and will be replaced with their print-specific values:
+
+```html
+<span class="date"></span>
+<span class="title"></span>
+<span class="pageNumber"></span>
+<span class="totalPages"></span>
+```
+
+**Note:** The header and footer do not inherit the same CSS as the main content, and the default font size is 0. You should include any required CSS directly in the header/footer. Here’s an example of a styled footer view:
+
+```html
+<style>
+    footer {
+        font-size: 13px;
+        color: black;
+    }
+</style>
+<footer>
+    <span class="date"></span>
+    <span class="pageNumber"></span> / <span class="totalPages"></span>
+</footer>
+```
+
+#### Custom Filename
+
+Define a custom name for the PDF when downloading from the browser.
+The `.pdf` extension is automatically appended if omitted:
 
 ```php
 ->name('custom_filename')
 ```
 
-**Stream PDF:** Display the PDF directly in the browser without saving it to disk:
+#### Save to File
+
+Use the `save` method to store the PDF at a given file path:
+
+```php
+->save('/path/to/save/yourfile.pdf')
+```
+
+#### Stream PDF
+
+Display the PDF directly in the browser without saving it to disk:
 
 ```php
 ->response()
 ```
 
-**Force Download:** Prompt the browser to immediately download the PDF:
+#### Force Download
+
+Prompt the browser to immediately download the PDF:
 
 ```php
 ->download()

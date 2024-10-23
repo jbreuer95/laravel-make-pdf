@@ -14,7 +14,7 @@ enum Format
     case A5;
     case A6;
 
-    public function widthInInches()
+    public function widthInInches(): float
     {
         return match ($this) {
             self::LETTER => 8.5,
@@ -29,7 +29,7 @@ enum Format
         };
     }
 
-    public function heightInInches()
+    public function heightInInches(): float
     {
         return match ($this) {
             self::LETTER => 11,

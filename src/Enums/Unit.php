@@ -8,7 +8,7 @@ enum Unit
     case CENTIMETER;
     case MILLIMETER;
 
-    public function toInches($value)
+    public function toInches(float $value): float
     {
         return match ($this) {
             self::INCH => round($value, 2),

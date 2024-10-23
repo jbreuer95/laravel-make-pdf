@@ -7,6 +7,7 @@ use Facebook\WebDriver\Chrome\ChromeDriver;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class Client
@@ -37,20 +38,6 @@ class Client
 
     /** @var array<mixed> */
     protected array $footerViewData = [];
-
-    public function __construct()
-    {
-        $this->browser = $this->startBrowser();
-        $this->devTools = $this->browser->getDevTools();
-    }
-
-    public function __destruct()
-    {
-        try {
-            $this->browser->quit();
-        } catch (\Throwable $th) {
-        }
-    }
 
     public function response(): Response
     {
@@ -140,10 +127,12 @@ class Client
             $this->footerHtml = view($this->footerViewName, $this->footerViewData)->render();
         }
 
+        $this->browser = $this->startBrowser();
         $this->browser->get('data:text/html;charset=utf-8,'.rawurlencode($this->html));
 
         $displayHeaderFooter = ! empty($this->footerHtml) || ! empty($this->headerHtml);
 
+        $this->devTools = $this->browser->getDevTools();
         $response = $this->devTools->execute('Page.printToPDF', [
             'printBackground' => true,
             'displayHeaderFooter' => $displayHeaderFooter,
@@ -157,12 +146,21 @@ class Client
             'marginRight' => 0,
         ]);
 
+        $this->browser->quit();
+
         return base64_decode($response['data']);
     }
 
     protected function startBrowser(): ChromeDriver
     {
-        putenv('WEBDRIVER_CHROME_DRIVER='.$this->chromeDriverBinary());
+        $chrome_driver_binary = $this->chromeHeadlessBinary();
+        $chrome_headless_binary = $this->chromeDriverBinary();
+
+        if (! File::exists($chrome_driver_binary) || ! File::exists($chrome_headless_binary)) {
+            throw new \Exception('chrome binary not found, please run: php artisan make-pdf:install');
+        }
+
+        putenv('WEBDRIVER_CHROME_DRIVER='.$chrome_driver_binary);
 
         $chromeOptions = new ChromeOptions;
         $chromeOptions->addArguments(['--disable-gpu']);
@@ -179,7 +177,7 @@ class Client
         $chromeOptions->addArguments(['--no-sandbox']);
         $chromeOptions->addArguments(['--hide-scrollbars']);
         $chromeOptions->addArguments(['--ignore-certificate-errors']);
-        $chromeOptions->setBinary($this->chromeHeadlessBinary());
+        $chromeOptions->setBinary($chrome_headless_binary);
 
         $capabilities = DesiredCapabilities::chrome();
         $capabilities->setCapability(ChromeOptions::CAPABILITY, $chromeOptions);

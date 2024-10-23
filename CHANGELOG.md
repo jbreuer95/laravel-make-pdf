@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-make-pdf` will be documented in this file.
 
+## v0.0.6 - 2024-10-23
+
+### What's Changed
+
+* added support for margins, formats and orientation
+* fix chrome instance dangling + add install command not run error
+* Bump orchestra/testbench from 9.5.0 to 9.5.2 by @dependabot in https://github.com/jbreuer95/laravel-make-pdf/pull/1
+* Bump larastan/larastan from 2.9.8 to 2.9.9 by @dependabot in https://github.com/jbreuer95/laravel-make-pdf/pull/2
+* Bump nunomaduro/collision from 8.4.0 to 8.5.0 by @dependabot in https://github.com/jbreuer95/laravel-make-pdf/pull/3
+
+**Full Changelog**: https://github.com/jbreuer95/laravel-make-pdf/compare/v0.0.5...v0.0.6
+
 ## v0.0.5 - 2024-10-04
 
 **Full Changelog**: https://github.com/jbreuer95/laravel-make-pdf/compare/v0.0.4...v0.0.5

@@ -79,8 +79,10 @@ PDF::html('<h1>Hello World</h1>')
 You can include a view in the header and footer of every page:
 
 ```php
-->headerView('view.header')
-->footerView('view.footer')
+PDF::view('view.name', [])
+    ->headerView('view.header')
+    ->footerView('view.footer')
+    ->response();
 ```
 
 Alternatively, set raw HTML for the header and footer:
@@ -114,13 +116,59 @@ In the header or footer, the following placeholders can be used and will be repl
 </footer>
 ```
 
+#### Landscape Orientation
+
+Switch the page orientation to landscape:
+
+```php
+use Breuer\MakePDF\Enums\Orientation;
+
+PDF::landscape()
+```
+
+#### Set Paper Format
+
+Specify a standard paper format:
+
+```php
+use Breuer\MakePDF\Enums\Format;
+
+PDF::format(Format::A4)
+```
+
+The following formats are available: `LETTER`, `LEGAL`, `A0`, `A1`, `A2`, `A3`, `A4`, `A5`, `A6`.
+
+#### Set Custom Paper Size
+
+Set a custom paper size, specifying height and width in inches (or another unit):
+
+```php
+use Breuer\MakePDF\Enums\Unit;
+
+PDF::paperSize($height, $width)  // Uses inches by default
+PDF::paperSize(29.7, 21, Unit::CENTIMETER)  // Uses centimeters and converts to inches
+```
+
+#### Set Margins
+
+Set custom margins for the PDF document:
+
+```php
+use Breuer\MakePDF\Enums\Unit;
+
+PDF::margins($top, $right, $bottom, $left) // Uses inches by default
+PDF::margins(2.54, 1.27, 2.54, 1.27, Unit::CENTIMETER)  // Centimeters, converted to inches
+```
+
 #### Custom Filename
 
 Define a custom name for the PDF when downloading from the browser.
 The `.pdf` extension is automatically appended if omitted:
 
 ```php
-->name('custom_filename')
+PDF::view('view.name', [])
+    ->name('custom_filename')
+    ->response();
 ```
 
 #### Save to File

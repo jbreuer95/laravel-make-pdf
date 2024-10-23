@@ -2,6 +2,9 @@
 
 namespace Breuer\MakePDF;
 
+use Breuer\MakePDF\Enums\Format;
+use Breuer\MakePDF\Enums\Orientation;
+use Breuer\MakePDF\Enums\Unit;
 use Facebook\WebDriver\Chrome\ChromeDevToolsDriver;
 use Facebook\WebDriver\Chrome\ChromeDriver;
 use Facebook\WebDriver\Chrome\ChromeOptions;
@@ -17,6 +20,20 @@ class Client
     protected ChromeDevToolsDriver $devTools;
 
     protected string $filename = 'download.pdf';
+
+    protected Orientation $orientation = Orientation::PORTRAIT;
+
+    protected float $paperWidth = 8.27;
+
+    protected float $paperHeight = 11.69;
+
+    protected float $marginTop = 0;
+
+    protected float $marginBottom = 0;
+
+    protected float $marginLeft = 0;
+
+    protected float $marginRight = 0;
 
     protected string $html = '';
 
@@ -113,6 +130,39 @@ class Client
         return $this;
     }
 
+    public function landscape(): self
+    {
+        $this->orientation = Orientation::LANDSCAPE;
+
+        return $this;
+    }
+
+    public function format(Format $format): self
+    {
+        $this->paperHeight = $format->heightInInches();
+        $this->paperWidth = $format->widthInInches();
+
+        return $this;
+    }
+
+    public function paperSize(float $height, float $width, Unit $unit = Unit::INCH): self
+    {
+        $this->paperHeight = $unit->toInches($height);
+        $this->paperWidth = $unit->toInches($width);
+
+        return $this;
+    }
+
+    public function margins(float $top = 0, float $right = 0, float $bottom = 0, float $left = 0, Unit $unit = Unit::INCH): self
+    {
+        $this->marginTop = $unit->toInches($top);
+        $this->marginBottom = $unit->toInches($bottom);
+        $this->marginLeft = $unit->toInches($left);
+        $this->marginRight = $unit->toInches($right);
+
+        return $this;
+    }
+
     protected function getContent(): string
     {
         if ($this->viewName) {
@@ -134,16 +184,17 @@ class Client
 
         $this->devTools = $this->browser->getDevTools();
         $response = $this->devTools->execute('Page.printToPDF', [
+            'landscape' => $this->orientation === Orientation::LANDSCAPE,
             'printBackground' => true,
             'displayHeaderFooter' => $displayHeaderFooter,
             'headerTemplate' => $this->headerHtml,
             'footerTemplate' => $this->footerHtml,
-            'paperWidth' => 8.27,
-            'paperHeight' => 11.69,
-            'marginTop' => 0,
-            'marginBottom' => 0,
-            'marginLeft' => 0,
-            'marginRight' => 0,
+            'paperWidth' => $this->paperWidth,
+            'paperHeight' => $this->paperHeight,
+            'marginTop' => $this->marginTop,
+            'marginBottom' => $this->marginBottom,
+            'marginLeft' => $this->marginLeft,
+            'marginRight' => $this->marginRight,
         ]);
 
         $this->browser->quit();
@@ -153,8 +204,8 @@ class Client
 
     protected function startBrowser(): ChromeDriver
     {
-        $chrome_driver_binary = $this->chromeHeadlessBinary();
-        $chrome_headless_binary = $this->chromeDriverBinary();
+        $chrome_driver_binary = $this->chromeDriverBinary();
+        $chrome_headless_binary = $this->chromeHeadlessBinary();
 
         if (! File::exists($chrome_driver_binary) || ! File::exists($chrome_headless_binary)) {
             throw new \Exception('chrome binary not found, please run: php artisan make-pdf:install');

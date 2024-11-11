@@ -2,6 +2,15 @@
 
 All notable changes to `laravel-make-pdf` will be documented in this file.
 
+## v0.0.7 - 2024-11-11
+
+### What's Changed
+
+* Bump larastan/larastan from 2.9.9 to 2.9.10 by @dependabot in https://github.com/jbreuer95/laravel-make-pdf/pull/4
+* add save and raw methods
+
+**Full Changelog**: https://github.com/jbreuer95/laravel-make-pdf/compare/v0.0.6...v0.0.7
+
 ## v0.0.6 - 2024-10-23
 
 ### What's Changed

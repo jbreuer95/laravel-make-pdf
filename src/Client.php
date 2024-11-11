@@ -72,6 +72,18 @@ class Client
         ]);
     }
 
+    public function save(string $path): self
+    {
+        File::put($path, $this->getContent());
+
+        return $this;
+    }
+
+    public function raw(): string
+    {
+        return $this->getContent();
+    }
+
     /** @param array<mixed> $data */
     public function view(string $view, array $data = []): self
     {

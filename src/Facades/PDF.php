@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Facade;
 /**
  * @method static \Illuminate\Http\Response response()
  * @method static \Illuminate\Http\Response download()
+ * @method static \Breuer\MakePDF\Client save(string $path)
+ * @method static string raw()
  * @method static \Breuer\MakePDF\Client view(string $view, array $data = [])
  * @method static \Breuer\MakePDF\Client headerView(string $view, array $data = [])
  * @method static \Breuer\MakePDF\Client footerView(string $view, array $data = [])

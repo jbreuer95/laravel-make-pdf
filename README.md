@@ -179,6 +179,14 @@ Use the `save` method to store the PDF at a given file path:
 ->save('/path/to/save/yourfile.pdf')
 ```
 
+#### Retrieve PDF as a String
+
+To obtain the raw PDF content as a string, use the `raw` method:
+
+```php
+$content = PDF::view('view.name', [])->raw();
+```
+
 #### Stream PDF
 
 Display the PDF directly in the browser without saving it to disk:

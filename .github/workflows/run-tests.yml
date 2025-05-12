@@ -21,30 +21,20 @@ jobs:
         laravel: [12.*, 11.*, 10.*]
         stability: [prefer-lowest, prefer-stable]
         include:
+          - laravel: 12.*
+            testbench: 10.*
           - laravel: 11.*
             testbench: 9.*
-            carbon: ^2.63
-            # pest: ^2.34
-            # pest-plugin-laravel: ^2.3
-            # pest-plugin-arch: ^2.7
-            # larastan: ^2.9
-            # phpstan-phpunit: ^1.3
-            # phpstan-deprecation-rule: ^1.1
           - laravel: 10.*
             testbench: 8.*
-            carbon: ^2.63
-            # pest: ^2.34
-            # pest-plugin-laravel: ^2.3
-            # pest-plugin-arch: ^2.7
-            # larastan: ^2.9
-            # phpstan-phpunit: ^1.3
-            # phpstan-deprecation-rule: ^1.1
         exclude:
           - laravel: 11.*
             php: 8.1
+          - laravel: 12.*
+            php: 8.1
             
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

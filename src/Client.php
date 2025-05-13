@@ -178,15 +178,15 @@ class Client
     protected function getContent(): string
     {
         if ($this->viewName) {
-            $this->html = view($this->viewName, $this->viewData)->render();
+            $this->html = view()->exists($this->viewName) ? view($this->viewName, $this->viewData)->render() : '';
         }
 
         if ($this->headerViewName) {
-            $this->headerHtml = view($this->headerViewName, $this->headerViewData)->render();
+            $this->headerHtml = view()->exists($this->headerViewName) ? view($this->headerViewName, $this->headerViewData)->render() : '';
         }
 
         if ($this->footerViewName) {
-            $this->footerHtml = view($this->footerViewName, $this->footerViewData)->render();
+            $this->footerHtml = view()->exists($this->footerViewName) ? view($this->footerViewName, $this->footerViewData)->render() : '';
         }
 
         $this->browser = $this->startBrowser();

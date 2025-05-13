@@ -29,6 +29,9 @@ jobs:
       - name: Update facade
         run: vendor/bin/testbench autodoc:facades src/Facades
 
+      - name: Patch enum default values in facade
+        run: php patch-facade-docblock.php
+
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:

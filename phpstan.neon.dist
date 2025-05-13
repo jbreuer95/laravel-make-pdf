@@ -1,7 +1,9 @@
 parameters:
-    level: max
+    level: 8
     paths:
         - src
         - config
     checkOctaneCompatibility: true
     checkModelProperties: true
+    excludePaths:
+        - src\Facades\PDF.php

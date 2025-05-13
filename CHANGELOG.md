@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-make-pdf` will be documented in this file.
 
+## v0.0.8 - 2025-05-13
+
+### What's Changed
+
+* Laravel 12 support by @sofyan-1999 in https://github.com/jbreuer95/laravel-make-pdf/pull/21
+
+### New Contributors
+
+* @sofyan-1999 made their first contribution in https://github.com/jbreuer95/laravel-make-pdf/pull/21
+
+**Full Changelog**: https://github.com/jbreuer95/laravel-make-pdf/compare/v0.0.7...v0.0.8
+
 ## v0.0.7 - 2024-11-11
 
 ### What's Changed

@@ -190,26 +190,29 @@ class Client
         }
 
         $this->browser = $this->startBrowser();
-        $this->browser->get('data:text/html;charset=utf-8,'.rawurlencode($this->html));
 
-        $displayHeaderFooter = ! empty($this->footerHtml) || ! empty($this->headerHtml);
+        try {
+            $this->browser->get('data:text/html;charset=utf-8,'.rawurlencode($this->html));
 
-        $this->devTools = $this->browser->getDevTools();
-        $response = $this->devTools->execute('Page.printToPDF', [
-            'landscape' => $this->orientation === Orientation::LANDSCAPE,
-            'printBackground' => true,
-            'displayHeaderFooter' => $displayHeaderFooter,
-            'headerTemplate' => $this->headerHtml,
-            'footerTemplate' => $this->footerHtml,
-            'paperWidth' => $this->paperWidth,
-            'paperHeight' => $this->paperHeight,
-            'marginTop' => $this->marginTop,
-            'marginBottom' => $this->marginBottom,
-            'marginLeft' => $this->marginLeft,
-            'marginRight' => $this->marginRight,
-        ]);
+            $displayHeaderFooter = ! empty($this->footerHtml) || ! empty($this->headerHtml);
 
-        $this->browser->quit();
+            $this->devTools = $this->browser->getDevTools();
+            $response = $this->devTools->execute('Page.printToPDF', [
+                'landscape' => $this->orientation === Orientation::LANDSCAPE,
+                'printBackground' => true,
+                'displayHeaderFooter' => $displayHeaderFooter,
+                'headerTemplate' => $this->headerHtml,
+                'footerTemplate' => $this->footerHtml,
+                'paperWidth' => $this->paperWidth,
+                'paperHeight' => $this->paperHeight,
+                'marginTop' => $this->marginTop,
+                'marginBottom' => $this->marginBottom,
+                'marginLeft' => $this->marginLeft,
+                'marginRight' => $this->marginRight,
+            ]);
+        } finally {
+            $this->browser->quit();
+        }
 
         return base64_decode($response['data']);
     }

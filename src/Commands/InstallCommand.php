@@ -85,14 +85,7 @@ class InstallCommand extends Command
      */
     protected function findChromeDriveDownloadsInResponse(Response $response): array
     {
-        if (! $response->ok()) {
-            throw new \Exception('Problem connecting to googlechromelabs.com');
-        }
-        if (empty($response->object()->channels->Stable->downloads->chromedriver)) {
-            throw new \Exception('Problem parsing response from googlechromelabs.com');
-        }
-
-        return $response->object()->channels->Stable->downloads->chromedriver;
+        return $this->findDownloadsInResponse($response, 'chromedriver');
     }
 
     /**
@@ -100,14 +93,56 @@ class InstallCommand extends Command
      */
     protected function findHeadlessChromeDownloadsInResponse(Response $response): array
     {
+        return $this->findDownloadsInResponse($response, 'chrome-headless-shell');
+    }
+
+    /**
+     * @return array<int, object{platform: string, url: string}>
+     *
+     * @throws \Exception
+     */
+    protected function findDownloadsInResponse(Response $response, string $downloadKey): array
+    {
         if (! $response->ok()) {
             throw new \Exception('Problem connecting to googlechromelabs.com');
         }
-        if (empty($response->object()->channels->Stable->downloads->{'chrome-headless-shell'})) {
+
+        $object = $response->object();
+        if (
+            ! is_object($object)
+            || ! isset($object->channels)
+            || ! is_object($object->channels)
+            || ! isset($object->channels->Stable)
+            || ! is_object($object->channels->Stable)
+            || ! isset($object->channels->Stable->downloads)
+            || ! is_object($object->channels->Stable->downloads)
+            || ! isset($object->channels->Stable->downloads->{$downloadKey})
+            || ! is_array($object->channels->Stable->downloads->{$downloadKey})
+        ) {
             throw new \Exception('Problem parsing response from googlechromelabs.com');
         }
 
-        return $response->object()->channels->Stable->downloads->{'chrome-headless-shell'};
+        $downloads = $object->channels->Stable->downloads->{$downloadKey};
+
+        $result = [];
+        foreach ($downloads as $download) {
+            if (
+                is_object($download)
+                && isset($download->platform)
+                && is_string($download->platform)
+                && isset($download->url)
+                && is_string($download->url)
+            ) {
+                $result[] = (object) [
+                    'platform' => $download->platform,
+                    'url' => $download->url,
+                ];
+            } else {
+                throw new \Exception("Invalid {$downloadKey} download entry");
+            }
+        }
+
+        return $result;
     }
 
     protected function getPlatformKey(): string

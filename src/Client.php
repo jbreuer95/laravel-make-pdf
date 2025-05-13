@@ -178,15 +178,15 @@ class Client
     protected function getContent(): string
     {
         if ($this->viewName) {
-            $this->html = view()->exists($this->viewName) ? view($this->viewName, $this->viewData)->render() : '';
+            $this->html = $this->renderView($this->viewName, $this->viewData);
         }
 
         if ($this->headerViewName) {
-            $this->headerHtml = view()->exists($this->headerViewName) ? view($this->headerViewName, $this->headerViewData)->render() : '';
+            $this->headerHtml = $this->renderView($this->headerViewName, $this->headerViewData);
         }
 
         if ($this->footerViewName) {
-            $this->footerHtml = view()->exists($this->footerViewName) ? view($this->footerViewName, $this->footerViewData)->render() : '';
+            $this->footerHtml = $this->renderView($this->footerViewName, $this->footerViewData);
         }
 
         $this->browser = $this->startBrowser();
@@ -214,7 +214,24 @@ class Client
             $this->browser->quit();
         }
 
-        return base64_decode($response['data']);
+        return base64_decode(is_string($response['data']) ? $response['data'] : '');
+    }
+
+    /**
+     * @param  array<mixed>  $data
+     */
+    protected function renderView(string $name, array $data): string
+    {
+        if (! view()->exists($name)) {
+            return '';
+        }
+
+        $viewData = [];
+        foreach ($data as $key => $value) {
+            $viewData[(string) $key] = $value;
+        }
+
+        return view($name, $viewData)->render();
     }
 
     protected function startBrowser(): ChromeDriver

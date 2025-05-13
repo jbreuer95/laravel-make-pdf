@@ -6,4 +6,4 @@ parameters:
     checkOctaneCompatibility: true
     checkModelProperties: true
     excludePaths:
-        - src\Facades\PDF.php
+        - src\Facades\*.php

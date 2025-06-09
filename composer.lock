@@ -9725,16 +9725,16 @@
         },
         {
             "name": "stevebauman/autodoc-facades",
-            "version": "v1.3.1",
+            "version": "v1.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stevebauman/autodoc-facades.git",
-                "reference": "ed54b765685cdc1a6155ef8e16a5326c98e6abe9"
+                "reference": "ab03800606dd80fdb81e98ece3faa8bf09ab17e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stevebauman/autodoc-facades/zipball/ed54b765685cdc1a6155ef8e16a5326c98e6abe9",
-                "reference": "ed54b765685cdc1a6155ef8e16a5326c98e6abe9",
+                "url": "https://api.github.com/repos/stevebauman/autodoc-facades/zipball/ab03800606dd80fdb81e98ece3faa8bf09ab17e6",
+                "reference": "ab03800606dd80fdb81e98ece3faa8bf09ab17e6",
                 "shasum": ""
             },
             "require": {
@@ -9786,7 +9786,7 @@
                 "issues": "https://github.com/stevebauman/autodoc-facades/issues",
                 "source": "https://github.com/stevebauman/autodoc-facades"
             },
-            "time": "2025-04-28T16:15:58+00:00"
+            "time": "2025-06-06T15:56:42+00:00"
         },
         {
             "name": "symfony/yaml",

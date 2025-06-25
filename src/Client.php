@@ -7,6 +7,7 @@ use Breuer\MakePDF\Enums\Orientation;
 use Breuer\MakePDF\Enums\Unit;
 use Facebook\WebDriver\Chrome\ChromeDevToolsDriver;
 use Facebook\WebDriver\Chrome\ChromeDriver;
+use Facebook\WebDriver\Chrome\ChromeDriverService;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Illuminate\Http\Response;
@@ -245,6 +246,10 @@ class Client
 
         putenv('WEBDRIVER_CHROME_DRIVER='.$chrome_driver_binary);
 
+        $port = self::getFreePort();
+        $args = ['--port='.$port];
+        $service = new ChromeDriverService($chrome_driver_binary, $port, $args);
+
         $chromeOptions = new ChromeOptions;
         $chromeOptions->addArguments(['--disable-gpu']);
         $chromeOptions->addArguments(['--disable-translate']);
@@ -265,7 +270,7 @@ class Client
         $capabilities = DesiredCapabilities::chrome();
         $capabilities->setCapability(ChromeOptions::CAPABILITY, $chromeOptions);
 
-        return ChromeDriver::start($capabilities);
+        return ChromeDriver::start($capabilities, $service);
     }
 
     public static function chromeDriverBinary(): string
@@ -325,5 +330,28 @@ class Client
     public static function onLinux(): bool
     {
         return PHP_OS_FAMILY === 'Linux';
+    }
+
+    public static function getFreePort($start = 9515, $end = 9999): int
+    {
+        for ($port = $start; $port <= $end; $port++) {
+            if (self::isPortFree($port)) {
+                return $port;
+            }
+        }
+
+        throw new \Exception("No free port found between $start and $end");
+    }
+
+    public static function isPortFree($port, $host = '127.0.0.1'): bool
+    {
+        $connection = @stream_socket_client("tcp://$host:$port", $errno, $errstr, 0.1);
+        if ($connection) {
+            fclose($connection);
+
+            return false;
+        }
+
+        return true;
     }
 }

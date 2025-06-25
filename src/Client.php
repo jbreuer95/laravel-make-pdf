@@ -343,7 +343,7 @@ class Client
         throw new \Exception("No free port found between $start and $end");
     }
 
-    public static function isPortFree(int $port, string $host = '127.0.0.1'): bool
+    protected static function isPortFree(int $port, string $host = '127.0.0.1'): bool
     {
         $connection = @stream_socket_client("tcp://$host:$port", $errno, $errstr, 0.1);
         if ($connection) {

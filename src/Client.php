@@ -332,7 +332,7 @@ class Client
         return PHP_OS_FAMILY === 'Linux';
     }
 
-    public static function getFreePort($start = 9515, $end = 9999): int
+    public static function getFreePort(int $start = 9515, int $end = 9999): int
     {
         for ($port = $start; $port <= $end; $port++) {
             if (self::isPortFree($port)) {
@@ -343,7 +343,7 @@ class Client
         throw new \Exception("No free port found between $start and $end");
     }
 
-    public static function isPortFree($port, $host = '127.0.0.1'): bool
+    public static function isPortFree(int $port, string $host = '127.0.0.1'): bool
     {
         $connection = @stream_socket_client("tcp://$host:$port", $errno, $errstr, 0.1);
         if ($connection) {

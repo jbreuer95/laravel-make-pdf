@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-make-pdf` will be documented in this file.
 
+## v0.0.9 - 2025-06-25
+
+### What's Changed
+
+* find an available port to allow multiple instances by @jbreuer95 in https://github.com/jbreuer95/laravel-make-pdf/pull/27
+
+**Full Changelog**: https://github.com/jbreuer95/laravel-make-pdf/compare/v0.0.8...v0.0.9
+
 ## v0.0.8 - 2025-05-13
 
 ### What's Changed

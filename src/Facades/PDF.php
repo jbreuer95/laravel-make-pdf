@@ -27,6 +27,8 @@ use Illuminate\Support\Facades\Facade;
  * @method static bool onMacARM()
  * @method static bool onMacIntel()
  * @method static bool onLinux()
+ * @method static int getFreePort(void $start = 9515, void $end = 9999)
+ * @method static bool isPortFree(void $port, void $host = '127.0.0.1')
  *
  * @see \Breuer\MakePDF\Client
  */

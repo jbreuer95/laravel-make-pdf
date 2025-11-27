@@ -7,29 +7,6 @@ All notable changes to `laravel-make-pdf` will be documented in this file.
 ### What's Changed
 
 * Use a temporary file for HTML in PDF generation
-  
-* Bump spatie/laravel-package-tools from 1.92.4 to 1.92.7 by @dependabot[bot] in https://github.com/jbreuer95/laravel-make-pdf/pull/29
-  
-* Bump larastan/larastan from 3.5.0 to 3.6.0 by @dependabot[bot] in https://github.com/jbreuer95/laravel-make-pdf/pull/30
-  
-* Bump aglipanci/laravel-pint-action from 2.5 to 2.6 by @dependabot[bot] in https://github.com/jbreuer95/laravel-make-pdf/pull/31
-  
-* Bump orchestra/testbench from 10.4.0 to 10.6.0 by @dependabot[bot] in https://github.com/jbreuer95/laravel-make-pdf/pull/33
-  
-* Bump actions/checkout from 4 to 5 by @dependabot[bot] in https://github.com/jbreuer95/laravel-make-pdf/pull/32
-  
-* Bump larastan/larastan from 3.6.0 to 3.6.1 by @dependabot[bot] in https://github.com/jbreuer95/laravel-make-pdf/pull/34
-  
-* Bump larastan/larastan from 3.6.1 to 3.7.1 by @dependabot[bot] in https://github.com/jbreuer95/laravel-make-pdf/pull/35
-  
-* Bump larastan/larastan from 3.7.1 to 3.7.2 by @dependabot[bot] in https://github.com/jbreuer95/laravel-make-pdf/pull/36
-  
-* Bump larastan/larastan from 3.7.2 to 3.8.0 by @dependabot[bot] in https://github.com/jbreuer95/laravel-make-pdf/pull/38
-  
-* Bump orchestra/testbench from 10.6.0 to 10.7.0 by @dependabot[bot] in https://github.com/jbreuer95/laravel-make-pdf/pull/40
-  
-* Bump actions/checkout from 5 to 6 by @dependabot[bot] in https://github.com/jbreuer95/laravel-make-pdf/pull/39
-  
 
 **Full Changelog**: https://github.com/jbreuer95/laravel-make-pdf/compare/v0.0.9...v0.0.10
 

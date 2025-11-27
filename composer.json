@@ -1,12 +1,12 @@
 {
-    "name": "jbreuer95/laravel-make-pdf",
+    "name": "jellebreuer/laravel-make-pdf",
     "description": "Convert HTML to PDF using a headless Chrome instance",
     "keywords": [
         "breuer",
         "laravel",
         "laravel-make-pdf"
     ],
-    "homepage": "https://github.com/jbreuer95/laravel-make-pdf",
+    "homepage": "https://github.com/jellebreuer/laravel-make-pdf",
     "license": "MIT",
     "authors": [
         {

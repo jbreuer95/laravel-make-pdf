@@ -192,8 +192,11 @@ class Client
 
         $this->browser = $this->startBrowser();
 
+        $html_tmp_file = tempnam(sys_get_temp_dir(), 'laravel-make-pdf').'.html';
+        File::put($html_tmp_file, $this->html);
+
         try {
-            $this->browser->get('data:text/html;charset=utf-8,'.rawurlencode($this->html));
+            $this->browser->get('file://'.$html_tmp_file);
 
             $displayHeaderFooter = ! empty($this->footerHtml) || ! empty($this->headerHtml);
 
@@ -212,6 +215,7 @@ class Client
                 'marginRight' => $this->marginRight,
             ]);
         } finally {
+            File::delete($html_tmp_file);
             $this->browser->quit();
         }
 
@@ -343,7 +347,7 @@ class Client
         throw new \Exception("No free port found between $start and $end");
     }
 
-    protected static function isPortFree(int $port, string $host = '127.0.0.1'): bool
+    public static function isPortFree(int $port, string $host = '127.0.0.1'): bool
     {
         $connection = @stream_socket_client("tcp://$host:$port", $errno, $errstr, 0.1);
         if ($connection) {

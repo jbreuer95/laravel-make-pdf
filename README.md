@@ -1,7 +1,7 @@
 # Convert HTML to PDF with headless Chrome
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/breuer/laravel-make-pdf.svg?style=flat-square)](https://packagist.org/packages/breuer/laravel-make-pdf)
-[![Total Downloads](https://img.shields.io/packagist/dt/jellebreuer/laravel-make-pdf.svg?style=flat-square)](https://packagist.org/packages/jellebreuer/laravel-make-pdf)
+[![Total Downloads](https://img.shields.io/packagist/dt/breuer/laravel-make-pdf.svg?style=flat-square)](https://packagist.org/packages/breuer/laravel-make-pdf)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/jellebreuer/laravel-make-pdf/run-tests.yml?branch=master&label=tests&style=flat-square)](https://github.com/jellebreuer/laravel-make-pdf/actions/workflows/run-tests.yml)
 [![GitHub PHPStan Action Status](https://img.shields.io/github/actions/workflow/status/jellebreuer/laravel-make-pdf/phpstan.yml?branch=master&label=phpstan&style=flat-square)](https://github.com/jellebreuer/laravel-make-pdf/actions/workflows/phpstan.yml)
 [![GitHub Pint Action Status](https://img.shields.io/github/actions/workflow/status/jellebreuer/laravel-make-pdf/fix-php-code-style-issues.yml?branch=master&label=laravel%20pint&style=flat-square)](https://github.com/jellebreuer/laravel-make-pdf/actions/workflows/fix-php-code-style-issues.yml)

@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-make-pdf` will be documented in this file.
 
+## v0.2.0 - 2025-11-27
+
+### What's Changed
+
+Changed package name to breuer/laravel-make-pdf
+
+**Full Changelog**: https://github.com/jellebreuer/laravel-make-pdf/compare/v0.1.0...v0.2.0
+
 ## v0.1.0 - 2025-11-27
 
 ### What's Changed

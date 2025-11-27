@@ -1,5 +1,5 @@
 {
-    "name": "jellebreuer/laravel-make-pdf",
+    "name": "breuer/laravel-make-pdf",
     "description": "Convert HTML to PDF using a headless Chrome instance",
     "keywords": [
         "breuer",

@@ -1,6 +1,6 @@
 # Convert HTML to PDF with headless Chrome
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/jellebreuer/laravel-make-pdf.svg?style=flat-square)](https://packagist.org/packages/jellebreuer/laravel-make-pdf)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/breuer/laravel-make-pdf.svg?style=flat-square)](https://packagist.org/packages/breuer/laravel-make-pdf)
 [![Total Downloads](https://img.shields.io/packagist/dt/jellebreuer/laravel-make-pdf.svg?style=flat-square)](https://packagist.org/packages/jellebreuer/laravel-make-pdf)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/jellebreuer/laravel-make-pdf/run-tests.yml?branch=master&label=tests&style=flat-square)](https://github.com/jellebreuer/laravel-make-pdf/actions/workflows/run-tests.yml)
 [![GitHub PHPStan Action Status](https://img.shields.io/github/actions/workflow/status/jellebreuer/laravel-make-pdf/phpstan.yml?branch=master&label=phpstan&style=flat-square)](https://github.com/jellebreuer/laravel-make-pdf/actions/workflows/phpstan.yml)
@@ -19,7 +19,7 @@ Laravel Make PDF requires **PHP 8.1+** and **Laravel 10+**.
 You can install the package via Composer:
 
 ```bash
-composer require jellebreuer/laravel-make-pdf
+composer require breuer/laravel-make-pdf
 ```
 
 After installation, download headless Chrome using the following Artisan command:
